@@ -1,6 +1,7 @@
 package dominio;
 
 
+import java.time.LocalDate;
 import java.util.Locale;
 
 public class ClasseProduto extends BaseParametro{
@@ -9,7 +10,7 @@ public class ClasseProduto extends BaseParametro{
         super();
      }
 
-     public ClasseProduto(int codigo,String descricao,Locale dataDeInclusao){
+     public ClasseProduto(int codigo, String descricao, LocalDate dataDeInclusao){
        super(codigo, descricao, dataDeInclusao);
      }
     

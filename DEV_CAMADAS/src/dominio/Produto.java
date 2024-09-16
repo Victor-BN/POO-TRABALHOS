@@ -1,5 +1,6 @@
 package dominio;
 
+import java.time.LocalDate;
 import java.util.Locale;
 
 public class Produto extends SubclasseProduto {
@@ -12,7 +13,7 @@ public class Produto extends SubclasseProduto {
     }
 
 
-    public Produto(int codigo, String descricao, Locale dataDeInclusao, int codigoClasse, int codigoSubclasse, double valor) {
+    public Produto(int codigo, String descricao, LocalDate dataDeInclusao, int codigoClasse, int codigoSubclasse, double valor) {
         super(codigo, descricao, dataDeInclusao, codigoClasse);
         this.codigoSubclasse = codigoSubclasse;
         this.valor = valor;

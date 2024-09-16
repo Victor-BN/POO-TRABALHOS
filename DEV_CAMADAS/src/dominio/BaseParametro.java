@@ -1,18 +1,19 @@
 package dominio;
 
 import java.util.Locale;
+import java.time.*;
 
 public abstract class BaseParametro {
     
   protected int codigo;
   protected String descricao;
-  protected Locale dataDeInclusao;
+  protected LocalDate dataDeInclusao;
 
   public BaseParametro(){
 
   }
 
-   public BaseParametro(int codigo, String descricao, Locale dataDeInclusao) {
+   public BaseParametro(int codigo, String descricao, LocalDate dataDeInclusao) {
     this.codigo = codigo;
     this.descricao = descricao;
     this.dataDeInclusao = dataDeInclusao;
@@ -35,11 +36,11 @@ public void setCodigo(int c){
     return this.descricao;
   }
 
-  public void setDataDeInclusao(Locale l){
+  public void setDataDeInclusao(LocalDate l){
     this.dataDeInclusao = l;
   }
 
-  public Locale getDataDeInclusao(){
+  public LocalDate getDataDeInclusao(){
     return this.dataDeInclusao;
   }
 

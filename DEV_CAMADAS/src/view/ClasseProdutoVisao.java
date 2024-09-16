@@ -1,6 +1,10 @@
 package view;
 
 import dominio.ClasseProduto;
+import fakedb.ClasseProdutoFakeDb;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ClasseProdutoVisao {
     
@@ -9,9 +13,15 @@ public class ClasseProdutoVisao {
     }
 
     public void Exibir(){
-        ClasseProduto cp1 = new ClasseProduto();
-        cp1.setCodigo(1);
-        cp1.setDescricao("Bebidas");
-        cp1.setDataDeInclusa(LocalDate.now());
+        ClasseProdutoFakeDb db = new ClasseProdutoFakeDb();
+        ArrayList<ClasseProduto> lista = db.getTabela();
+        for (ClasseProduto cp : lista) {
+            System.out.println("-----------------------------");
+            System.out.println("Classe de produto");
+            System.out.println("Código " +cp.getCodigo());
+            System.out.println("Descricao:"+cp.getDescricao());
+            System.out.println("Data de Inclusao:"+cp.getDataDeInclusao());
+
+        }
     }
 }
