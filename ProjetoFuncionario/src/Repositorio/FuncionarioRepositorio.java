@@ -29,16 +29,51 @@ public class FuncionarioRepositorio extends BaseRepositorio<Funcionario> {
 
     @Override
     public Funcionario Edit(Funcionario obj) {
+        Funcionario altera = this.Read(obj.getCodigo());
+
+        if(altera != null){
+            altera.setCargo(obj.getCargo());
+            altera.setEmail(obj.getEmail());
+            altera.setTelefone(obj.getTelefone());
+            altera.setSalario(obj.getSalario());
+            return altera;
+        }else if(altera.equals(obj)){
+          System.out.println("Nao foi possivel alterar os dados do funcionario:"+altera.getNome());
+          System.out.println("Pois estes dados , sao os mesmos do atual funcionario");
+          return null;
+
+        }
+
+        System.out.println("Nao foi possivel fazer a alteracao , pois nao foi encontrado o funcionario");
         return null;
     }
 
     @Override
     public Funcionario Add(Funcionario obj) {
-        return null;
+        if(tabeladados.isEmpty()){
+            obj.setCodigo(1);
+        }else{
+            int ultimocod = this.tabeladados.get(this.tabeladados.size() - 1).getCodigo();
+            obj.setCodigo(ultimocod+1);
+        }
+        this.tabeladados.add(obj);
+        return obj;
     }
 
     @Override
     public Funcionario Delete(int codigo) {
-        return null;
+       Funcionario fun = this.Read(codigo);
+
+       if(fun != null){
+           System.out.println("Deletando o Funcionario:");
+           this.tabeladados.remove(fun);
+           System.out.println("Funcionario:"+fun.getNome()+",Deletado com sucesso");
+           return fun;
+       }
+
+       System.out.println("Nao foi possivel deletar");
+       System.out.println("Funcionario nao existe!!!");
+
+       return null;
     }
 }
