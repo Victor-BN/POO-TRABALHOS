@@ -3,6 +3,8 @@ package Repositorio;
 import Dominio.Funcionario;
 import Fakedb.ClasseFuncionarioFakeDb;
 
+import java.util.ArrayList;
+
 public class FuncionarioRepositorio extends BaseRepositorio<Funcionario> {
 
 
@@ -50,12 +52,13 @@ public class FuncionarioRepositorio extends BaseRepositorio<Funcionario> {
 
     @Override
     public Funcionario Add(Funcionario obj) {
-        if(tabeladados.isEmpty()){
+        if(this.tabeladados.isEmpty()){
             obj.setCodigo(1);
         }else{
             int ultimocod = this.tabeladados.get(this.tabeladados.size() - 1).getCodigo();
             obj.setCodigo(ultimocod+1);
         }
+
         this.tabeladados.add(obj);
         return obj;
     }

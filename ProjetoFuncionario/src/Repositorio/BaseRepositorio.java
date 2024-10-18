@@ -8,7 +8,7 @@ public abstract class BaseRepositorio<TDominio> {
 
    }
 
-   protected ArrayList<TDominio> tabeladados;
+   protected ArrayList<TDominio> tabeladados ;
 
    public ArrayList<TDominio> Browse(){
        return this.tabeladados;
