@@ -137,32 +137,38 @@ public class FuncionarioMenu extends BaseMenu<Funcionario>{
 
     @Override
     public void Atualizar() {
-           System.out.println("DIGITE O CODIGO DO FUNCIONARIO");
-           int codigo = sc.nextInt();
-           Funcionario funcionario = this.funcioservico.Ler(codigo);
+
+        System.out.println("DEJA ALTERAR TODOS OS DADOS DO FUNCIONARIO?");
+        String opcao = sc.next();
+
+          if(opcao.equalsIgnoreCase("S")) {
+              System.out.println("DIGITE O CODIGO DO FUNCIONARIO");
+              int codigo = sc.nextInt();
+              Funcionario funcionario = this.funcioservico.Ler(codigo);
 
 
-           System.out.println("DIGITE O NOVO CARGO");
-           String cargo = sc.next();
-           System.out.println("DIGITE O NOVO EMAIL");
-           String email = sc.next();
-           System.out.println("DIGITE O NOVO TELEFONE");
-           String telefone = sc.next();
-           System.out.println("DIGITE 0 NOVO SALARIO");
-           double salario = sc.nextDouble();
+              System.out.println("DIGITE O NOVO CARGO");
+              String cargo = sc.next();
+              System.out.println("DIGITE O NOVO EMAIL");
+              String email = sc.next();
+              System.out.println("DIGITE O NOVO TELEFONE");
+              String telefone = sc.next();
+              System.out.println("DIGITE 0 NOVO SALARIO");
+              double salario = sc.nextDouble();
 
-           funcionario.setCargo(cargo);
-           funcionario.setEmail(email);
-           funcionario.setTelefone(telefone);
-           funcionario.setSalario(salario);
+              funcionario.setCargo(cargo);
+              funcionario.setEmail(email);
+              funcionario.setTelefone(telefone);
+              funcionario.setSalario(salario);
 
-           if(funcionario != null){
-               this.funcioservico.Editar(funcionario);
-               System.out.println("OS DADOS DO FUNCIONARIO:"+funcionario.getNome()+",FOI ALTERADO CON SUCESSO");
-           }else {
+              if (funcionario != null) {
+                  this.funcioservico.Editar(funcionario);
+                  System.out.println("OS DADOS DO FUNCIONARIO:" + funcionario.getNome() + ",FOI ALTERADO CON SUCESSO");
+              }
 
-               System.out.println("ERRO AO ALTERAR OS DADDOS DO FUNCIONARIO(A):" + funcionario.getNome());
-           }
+          }else if(opcao.equalsIgnoreCase("N")){
+
+          }
 
         System.out.println("Clique <ENTER> para continuar...");
         this.sc.nextLine();
@@ -179,8 +185,18 @@ public class FuncionarioMenu extends BaseMenu<Funcionario>{
         Funcionario fun = this.funcioservico.Ler(cod);
 
         if(fun != null){
-           this.
+            this.funcioservico.Remover(cod);
+            System.out.println("O FUNCIONARIO:"+fun.getNome()+",FOI REMOVIDO COM SUCESSO");
+        }else{
+            System.out.println("NAO FOI POSSIVEL REMOVER O FUNCIONARIO");
+
         }
+
+        System.out.println("Clique <ENTER> para continuar...");
+        this.sc.nextLine();
+        this.sc.nextLine();
+
+
 
     }
 
