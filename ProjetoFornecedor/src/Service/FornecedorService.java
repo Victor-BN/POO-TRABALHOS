@@ -29,13 +29,11 @@ public class FornecedorService extends BaseService<Fornecedor>{
 
     @Override
     public Fornecedor Editar(Fornecedor obj) {
-        return null;
+        return this.fornecedorRp.Edit(obj);
     }
-
-
 
     @Override
     public Fornecedor Remover(int codigo) {
-        return null;
+        return this.fornecedorRp.Delete(codigo);
     }
 }

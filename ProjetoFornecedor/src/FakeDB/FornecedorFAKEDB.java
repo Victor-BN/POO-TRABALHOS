@@ -5,6 +5,10 @@ import Dominio.Fornecedor;
 import java.util.ArrayList;
 
 public class FornecedorFAKEDB extends BaseFakedb<Fornecedor> {
+
+    public FornecedorFAKEDB(){
+        super();
+    }
     @Override
     protected void preencherdados() {
         this.tabela = new ArrayList<>();

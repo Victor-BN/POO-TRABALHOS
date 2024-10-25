@@ -18,12 +18,9 @@ public class FornecedorRepositorio extends BaseRepositorio<Fornecedor>{
          if(!listatab.isEmpty()){
              for(Fornecedor forne : listatab){
                  if(forne.getCodigo() == codigo){
-                     this.listatab.get(codigo);
                      return forne;
                  }else{
                      System.out.println("FORNECEDOR NAO ENCONTRADO!!");
-                     return null;
-
                  }
 
              }

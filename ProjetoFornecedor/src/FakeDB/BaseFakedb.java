@@ -13,6 +13,6 @@ public abstract class BaseFakedb<TDominio> {
     protected ArrayList<TDominio> tabela;
 
     public ArrayList<TDominio> getTabela(){
-      return this.tabela;
+      return tabela;
     }
 }
