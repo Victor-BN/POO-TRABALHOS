@@ -1,5 +1,7 @@
 package Dominio;
 
+import java.util.Objects;
+
 public class Fornecedor {
 
     private int codigo;
@@ -66,4 +68,6 @@ public class Fornecedor {
     public void setNomeFan(String nomeFan) {
         NomeFan = nomeFan;
     }
+
+
 }

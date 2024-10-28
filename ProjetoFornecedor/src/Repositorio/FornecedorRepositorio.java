@@ -24,8 +24,10 @@ public class FornecedorRepositorio extends BaseRepositorio<Fornecedor>{
                  }
 
              }
+         }else{
+             System.out.println("LISTA VAZIA!!!");
          }
-         System.out.println("LISTA VAZIA!!!");
+
          return null;
     }
 

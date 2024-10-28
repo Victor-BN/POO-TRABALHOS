@@ -1,9 +1,11 @@
 package View;
 
 import Dominio.Fornecedor;
+import FakeDB.FornecedorFAKEDB;
 import Service.FornecedorService;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ForneceMenu extends BaseMenu<Fornecedor> {
 
@@ -61,20 +63,26 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     }
 
+
     @Override
     public void Adicionar() {
         Fornecedor fornecedor = new Fornecedor();
+        //FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
 
         System.out.println("DIGITE A RAZAO SOCIAL DO FORNECEDOR:");
         String razao = sc.next();
         System.out.println("DIGITE O NOME FANTASIA DO FORNECEDOR:");
         String nomefantasia = sc.next();
+        if(nomefantasia.equals(fornecedor.getNomeFan())){
+            System.out.println("");
+        }
         System.out.println("DIGITE O CNPJ:");
         String cnpj = sc.next();
         System.out.println("DIGITE O EMAIL DO FORNECEDOR:");
         String email = sc.next();
         System.out.println("DIGITE O TELEFONE DO FORNECEDOR");
         String telefone = sc.next();
+
 
         fornecedor.setRazaoSocial(razao);
         fornecedor.setNomeFan(nomefantasia);
@@ -157,7 +165,8 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void Remover() {
-
+        System.out.println("DIDITE O CODIGO DO FUNCIONARIO A REMOVER: ");
+        int cod = sc.nextInt();
     }
 
     private void ImprimirPorLinha(Fornecedor forne){
