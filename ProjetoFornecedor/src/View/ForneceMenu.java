@@ -73,9 +73,6 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
         String razao = sc.next();
         System.out.println("DIGITE O NOME FANTASIA DO FORNECEDOR:");
         String nomefantasia = sc.next();
-        if(nomefantasia.equals(fornecedor.getNomeFan())){
-            System.out.println("");
-        }
         System.out.println("DIGITE O CNPJ:");
         String cnpj = sc.next();
         System.out.println("DIGITE O EMAIL DO FORNECEDOR:");
@@ -91,7 +88,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
         fornecedor.setTelefone(telefone);
 
         if(fornecedorService.Adicionar(fornecedor) != null){
-            System.out.println("FORNECEDOR"+fornecedor.getNomeFan()+",FOI ADICIONADO COM SUCESSO");
+            System.out.println("FORNECEDOR:"+fornecedor.getNomeFan()+",FOI ADICIONADO COM SUCESSO");
         }else{
             System.out.println("ERRO AO ADICIONAR O FORNECEDOR");
         }
@@ -112,8 +109,8 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
             String razao = sc.next();
             System.out.println("DIGITE O NOVO NOME FANTASIA DO FORNECEDOR:");
             String nomefantasia = sc.next();
-            System.out.println("DIGITE O NOVO CNPJ:");
-            String cnpj = sc.next();
+            //System.out.println("DIGITE O NOVO CNPJ:");
+            //String cnpj = sc.next();
             System.out.println("DIGITE O NOVO EMAIL DO FORNECEDOR:");
             String email = sc.next();
             System.out.println("DIGITE O NOVO TELEFONE DO FORNECEDOR");
@@ -122,13 +119,13 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
             alterar.setRazaoSocial(razao);
             alterar.setNomeFan(nomefantasia);
-            alterar.setCNPJ(cnpj);
+            //alterar.setCNPJ(cnpj);
             alterar.setEmail(email);
             alterar.setTelefone(telefone);
 
             if(alterar != null) {
                 this.fornecedorService.Editar(alterar);
-                System.out.println("DADOS DO FORNECEDOR(A) ATUALIZADO ");
+                System.out.println("DADOS DO FORNECEDOR(A):"+alterar.getNomeFan()+" ATUALIZADO ");
             }
 
 
@@ -145,8 +142,16 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
       if(fornelista != null){
           for(Fornecedor lista : fornelista){
               ImprimirPorLinha(lista);
+
           }
       }
+      if(fornelista.isEmpty()){
+          System.out.println("NAO CONTEM NENHUM FORNECEDOR NA LISTA");
+      }
+
+      System.out.println("Clique <ENTER> para continuar...");
+      this.sc.nextLine();
+      this.sc.nextLine();
 
     }
 
@@ -165,8 +170,21 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void Remover() {
-        System.out.println("DIDITE O CODIGO DO FUNCIONARIO A REMOVER: ");
+        System.out.println("DIGITE O CODIGO DO FORNECEDOR A REMOVER: ");
         int cod = sc.nextInt();
+
+        Fornecedor forne = this.fornecedorService.Ler(cod);
+
+        if(forne != null){
+            System.out.println("FORNECEDOR REMOVIDO COM SUCESSO:"+forne.getNomeFan());
+            this.fornecedorService.Remover(cod);
+        }else{
+            System.out.println("ERRO AO REMOVER O FORNECEDOR");
+        }
+
+        System.out.println("Clique <ENTER> para continuar...");
+        this.sc.nextLine();
+        this.sc.nextLine();
     }
 
     private void ImprimirPorLinha(Fornecedor forne){
