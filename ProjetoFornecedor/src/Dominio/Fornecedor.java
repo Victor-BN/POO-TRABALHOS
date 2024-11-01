@@ -70,4 +70,16 @@ public class Fornecedor {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fornecedor that = (Fornecedor) o;
+        return getCodigo() == that.getCodigo() && Objects.equals(getRazaoSocial(), that.getRazaoSocial()) && Objects.equals(getNomeFan(), that.getNomeFan()) && Objects.equals(getCNPJ(), that.getCNPJ()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getTelefone(), that.getTelefone());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCodigo(), getRazaoSocial(), getNomeFan(), getCNPJ(), getEmail(), getTelefone());
+    }
 }

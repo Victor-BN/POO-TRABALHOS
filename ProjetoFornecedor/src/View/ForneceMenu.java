@@ -1,5 +1,6 @@
 package View;
 
+import java.lang.String;
 import Dominio.Fornecedor;
 import FakeDB.FornecedorFAKEDB;
 import Service.FornecedorService;
@@ -67,25 +68,61 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
     @Override
     public void Adicionar() {
         Fornecedor fornecedor = new Fornecedor();
-        //FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
+        FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
 
         System.out.println("DIGITE A RAZAO SOCIAL DO FORNECEDOR:");
         String razao = sc.next();
+        fornecedor.setRazaoSocial(razao);
+
         System.out.println("DIGITE O NOME FANTASIA DO FORNECEDOR:");
         String nomefantasia = sc.next();
+        fornecedor.setNomeFan(nomefantasia);
+
         System.out.println("DIGITE O CNPJ:");
         String cnpj = sc.next();
+        fornecedor.setCNPJ(cnpj);
+
+
         System.out.println("DIGITE O EMAIL DO FORNECEDOR:");
         String email = sc.next();
+        fornecedor.setEmail(email);
+
+
         System.out.println("DIGITE O TELEFONE DO FORNECEDOR");
         String telefone = sc.next();
-
-
-        fornecedor.setRazaoSocial(razao);
-        fornecedor.setNomeFan(nomefantasia);
-        fornecedor.setCNPJ(cnpj);
-        fornecedor.setEmail(email);
         fornecedor.setTelefone(telefone);
+
+
+        for(Fornecedor forne :fakedb.getTabela()){
+            
+
+            if(forne.getNomeFan().equals(nomefantasia)){
+                System.out.println("NOME FANTASIA:"+fornecedor.getNomeFan()+",EXISTENTE");
+                System.out.println("DIGITE OUTRO NOME FANTASIA DO FORNECEDOR:");
+                nomefantasia = sc.next();
+                fornecedor.setNomeFan(nomefantasia);
+
+            }
+                if(forne.getCNPJ().equals(cnpj)){
+                System.out.println("O CNPJ:"+fornecedor.getCNPJ()+",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO CNPJ VALIDO DO FORNECEDOR:");
+                cnpj = sc.next();
+                fornecedor.setCNPJ(cnpj);
+
+            }
+                if(forne.getEmail().equals(email)){
+                System.out.println("O EMAIL:"+fornecedor.getEmail()+",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO EMAIL VALIDO DO FORNECEDOR:");
+                email = sc.next();
+                fornecedor.setEmail(email);
+            }
+                if(forne.getTelefone().equals(telefone)){
+                System.out.println("O TELEFONE:"+fornecedor.getTelefone()+",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO TELEFONE VALIDO DO FORNECEDOR:");
+                telefone = sc.next();
+                fornecedor.setTelefone(telefone);
+            }
+        }
 
         if(fornecedorService.Adicionar(fornecedor) != null){
             System.out.println("FORNECEDOR:"+fornecedor.getNomeFan()+",FOI ADICIONADO COM SUCESSO");

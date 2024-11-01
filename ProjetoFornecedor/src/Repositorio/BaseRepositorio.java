@@ -1,6 +1,9 @@
 package Repositorio;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class BaseRepositorio<TDominio> {
 
@@ -12,7 +15,7 @@ public abstract class BaseRepositorio<TDominio> {
 
 
     public ArrayList<TDominio> Browse(){
-        return this.listatab;
+        return listatab;
     }
 
     public abstract TDominio Read(int codigo);
