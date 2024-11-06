@@ -6,7 +6,9 @@ import FakeDB.FornecedorFAKEDB;
 import Service.FornecedorService;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
+
+
 
 public class ForneceMenu extends BaseMenu<Fornecedor> {
 
@@ -18,6 +20,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
     private String cnpj;
     private String email;
     private String telefone;
+    
 
 
     public ForneceMenu() {
@@ -74,7 +77,8 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
     public void Adicionar() {
        // Fornecedor fornecedor = new Fornecedor();
        // FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
-
+         
+        Util.LimparConsole();
         System.out.println("DIGITE A RAZAO SOCIAL DO FORNECEDOR:");
         razao = sc.next();
         fornecedor.setRazaoSocial(razao);
@@ -153,6 +157,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
     }
     @Override
     public void Atualizar() {
+        Util.LimparConsole();
         System.out.println("DIGITE O CODIGO DO FORNECEDOR QUE VOCE DEJA EDITAR");
         int codigo = sc.nextInt();
 
@@ -198,6 +203,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void Exibir() {
+        Util.LimparConsole();
         ArrayList<Fornecedor> fornelista  = this.fornecedorService.Navegar();
 
         if(fornelista != null){
@@ -218,7 +224,8 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void Pesquisar() {
-        System.out.println("DIGITE O CODIGO DO FORNECEDOR QUE VOCE DEJA EDITAR");
+        Util.LimparConsole();
+        System.out.println("DIGITE O CODIGO DO FORNECEDOR QUE VOCE DEJA PESQUISAR");
         int codigo = sc.nextInt();
 
         Fornecedor fonecedor = this.fornecedorService.Ler(codigo);
@@ -227,10 +234,15 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
             ImprimirPorLinha(fonecedor);
         }
 
+        System.out.println("Clique <ENTER> para continuar...");
+        this.sc.nextLine();
+        this.sc.nextLine();
+
     }
 
     @Override
     public void Remover() {
+        Util.LimparConsole();
         System.out.println("DIGITE O CODIGO DO FORNECEDOR A REMOVER: ");
         int cod = sc.nextInt();
 
@@ -250,7 +262,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     private void ImprimirPorLinha(Fornecedor forne){
         String mensagem = "";
-        mensagem += "Funcionario: ";
+        mensagem += "Fornecedor:: ";
         mensagem += "Código: " + forne.getCodigo() + " | ";
         mensagem += "Razao Social: " + forne.getRazaoSocial() + " | ";
         mensagem += "Nome Fantasia:" + forne.getNomeFan() + " |";

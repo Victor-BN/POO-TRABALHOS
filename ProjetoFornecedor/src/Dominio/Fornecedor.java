@@ -1,6 +1,6 @@
 package Dominio;
 
-import java.util.Objects;
+
 
 public class Fornecedor {
 

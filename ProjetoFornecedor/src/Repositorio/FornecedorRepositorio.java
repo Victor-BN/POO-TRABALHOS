@@ -22,13 +22,11 @@ public class FornecedorRepositorio extends BaseRepositorio<Fornecedor>{
              for (Fornecedor forne : listatab) {
                  if (forne.getCodigo() == codigo) {
                      return forne;
-                 } else {
-                     System.out.println("FORNECEDOR NAO ENCONTRADO!!");
-                 }
+                 } 
              }
                }
 
-         return null;
+          return null;
     }
 
     @Override
