@@ -13,6 +13,6 @@ public class FornecedorFAKEDB extends BaseFakedb<Fornecedor> {
     protected void preencherdados() {
         this.tabela = new ArrayList<>();
 
-        this.tabela.add(new Fornecedor(32,"ZLIMENTICIO","BEBIDASICE","7657267","ice@gmil.com","566444"));
+        this.tabela.add(new Fornecedor(32,"ALIMENTICIO","BEBIDASICE","775456","ice@gmil.com","566444"));
     }
 }

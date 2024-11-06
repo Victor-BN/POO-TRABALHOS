@@ -15,18 +15,18 @@ public class FornecedorRepositorio extends BaseRepositorio<Fornecedor>{
 
     @Override
     public Fornecedor Read(int codigo) {
-         if(!listatab.isEmpty()){
-             for(Fornecedor forne : listatab){
-                 if(forne.getCodigo() == codigo){
+         if(listatab.isEmpty()){
+             System.out.println("A LISTA NAO CONTEM NENHUM FORNECEDOR");
+
+         }else {
+             for (Fornecedor forne : listatab) {
+                 if (forne.getCodigo() == codigo) {
                      return forne;
-                 }else{
+                 } else {
                      System.out.println("FORNECEDOR NAO ENCONTRADO!!");
                  }
-
              }
-         }else{
-             System.out.println("LISTA VAZIA!!!");
-         }
+               }
 
          return null;
     }

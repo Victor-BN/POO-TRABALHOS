@@ -11,21 +11,27 @@ import java.util.Objects;
 public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     private FornecedorService fornecedorService;
+    private Fornecedor fornecedor = new Fornecedor();
+    private  FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
+    private String razao;
+    private String nomefantasia;
+    private String cnpj;
+    private String email;
+    private String telefone;
 
 
-    public ForneceMenu(){
+    public ForneceMenu() {
         super();
         this.fornecedorService = new FornecedorService();
 
     }
 
 
-
     @Override
     public void ExibirMenu() {
         int opt;
 
-        do{
+        do {
             System.out.println("Menu funcionario ");
             System.out.println("------------------");
             System.out.println("1-PARA ADICIONAR UM FUNCIONARIO");
@@ -37,7 +43,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
             System.out.println("DIGITE A OPCAO DESEJADA:");
 
             opt = sc.nextInt();
-            switch (opt){
+            switch (opt) {
                 case 1:
                     this.Adicionar();
                     break;
@@ -59,74 +65,49 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
             }
 
 
-
-        }while(opt != 0);
+        } while (opt != 0);
 
     }
 
 
     @Override
     public void Adicionar() {
-        Fornecedor fornecedor = new Fornecedor();
-        FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
+       // Fornecedor fornecedor = new Fornecedor();
+       // FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
 
         System.out.println("DIGITE A RAZAO SOCIAL DO FORNECEDOR:");
-        String razao = sc.next();
+        razao = sc.next();
         fornecedor.setRazaoSocial(razao);
 
+
         System.out.println("DIGITE O NOME FANTASIA DO FORNECEDOR:");
-        String nomefantasia = sc.next();
-        fornecedor.setNomeFan(nomefantasia);
+         nomefantasia = sc.next();
+         VerificaInfo();
+         fornecedor.setNomeFan(nomefantasia);
 
         System.out.println("DIGITE O CNPJ:");
-        String cnpj = sc.next();
-        fornecedor.setCNPJ(cnpj);
+         cnpj = sc.next();
+         VerificaInfo();
+         fornecedor.setCNPJ(cnpj);
 
 
         System.out.println("DIGITE O EMAIL DO FORNECEDOR:");
-        String email = sc.next();
+        email = sc.next();
+        VerificaInfo();
         fornecedor.setEmail(email);
 
 
         System.out.println("DIGITE O TELEFONE DO FORNECEDOR");
-        String telefone = sc.next();
+        telefone = sc.next();
+        VerificaInfo();
         fornecedor.setTelefone(telefone);
 
 
-        for(Fornecedor forne :fakedb.getTabela()){
-            
 
-            if(forne.getNomeFan().equals(nomefantasia)){
-                System.out.println("NOME FANTASIA:"+fornecedor.getNomeFan()+",EXISTENTE");
-                System.out.println("DIGITE OUTRO NOME FANTASIA DO FORNECEDOR:");
-                nomefantasia = sc.next();
-                fornecedor.setNomeFan(nomefantasia);
 
-            }
-                if(forne.getCNPJ().equals(cnpj)){
-                System.out.println("O CNPJ:"+fornecedor.getCNPJ()+",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO CNPJ VALIDO DO FORNECEDOR:");
-                cnpj = sc.next();
-                fornecedor.setCNPJ(cnpj);
-
-            }
-                if(forne.getEmail().equals(email)){
-                System.out.println("O EMAIL:"+fornecedor.getEmail()+",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO EMAIL VALIDO DO FORNECEDOR:");
-                email = sc.next();
-                fornecedor.setEmail(email);
-            }
-                if(forne.getTelefone().equals(telefone)){
-                System.out.println("O TELEFONE:"+fornecedor.getTelefone()+",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO TELEFONE VALIDO DO FORNECEDOR:");
-                telefone = sc.next();
-                fornecedor.setTelefone(telefone);
-            }
-        }
-
-        if(fornecedorService.Adicionar(fornecedor) != null){
-            System.out.println("FORNECEDOR:"+fornecedor.getNomeFan()+",FOI ADICIONADO COM SUCESSO");
-        }else{
+        if (fornecedorService.Adicionar(fornecedor) != null) {
+            System.out.println("FORNECEDOR:" + fornecedor.getNomeFan() + ",FOI ADICIONADO COM SUCESSO");
+        } else {
             System.out.println("ERRO AO ADICIONAR O FORNECEDOR");
         }
         System.out.println("Clique <ENTER> para continuar...");
@@ -134,6 +115,42 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
         this.sc.nextLine();
     }
 
+
+    public void VerificaInfo(){
+        for (Fornecedor forne : fakedb.getTabela()) {
+
+
+            if (forne.getNomeFan().equals(nomefantasia)) {
+                System.out.println("NOME FANTASIA:" + forne.getNomeFan() + ",EXISTENTE");
+                System.out.println("DIGITE OUTRO NOME FANTASIA DO FORNECEDOR:");
+                nomefantasia = sc.next();
+                fornecedor.setNomeFan(nomefantasia);
+                VerificaInfo();  //CHAMO O METODO PARA VERIFICAR NOVAMENTE
+            }
+            if (forne.getCNPJ().equals(cnpj)) {
+                System.out.println("O CNPJ:" + forne.getCNPJ() + ",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO CNPJ VALIDO DO FORNECEDOR:");
+                cnpj = sc.next();
+                fornecedor.setCNPJ(cnpj);
+                VerificaInfo();
+
+            }
+            if (forne.getEmail().equals(email)) {
+                System.out.println("O EMAIL:" + forne.getEmail() + ",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO EMAIL VALIDO DO FORNECEDOR:");
+                email = sc.next();
+                fornecedor.setEmail(email);
+                VerificaInfo();
+            }
+            if (forne.getTelefone().equals(telefone)) {
+                System.out.println("O TELEFONE:" + forne.getTelefone() + ",JA EXISTENTE");
+                System.out.println("DIGITE OUTRO TELEFONE VALIDO DO FORNECEDOR:");
+                telefone = sc.next();
+                fornecedor.setTelefone(telefone);
+                VerificaInfo();
+            }
+        }
+    }
     @Override
     public void Atualizar() {
         System.out.println("DIGITE O CODIGO DO FORNECEDOR QUE VOCE DEJA EDITAR");
@@ -141,7 +158,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
         Fornecedor alterar = this.fornecedorService.Ler(codigo);
 
-
+        if (alterar != null) {
             System.out.println("DIGITE A NOVA RAZAO SOCIAL DO FORNECEDOR:");
             String razao = sc.next();
             System.out.println("DIGITE O NOVO NOME FANTASIA DO FORNECEDOR:");
@@ -160,35 +177,42 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
             alterar.setEmail(email);
             alterar.setTelefone(telefone);
 
-            if(alterar != null) {
-                this.fornecedorService.Editar(alterar);
-                System.out.println("DADOS DO FORNECEDOR(A):"+alterar.getNomeFan()+" ATUALIZADO ");
-            }
+            this.fornecedorService.Editar(alterar);
+            System.out.println("DADOS DO FORNECEDOR(A):" + alterar.getNomeFan() + " ATUALIZADO ");
+
+        }else{
+            System.out.println("NAO FOI POSSIVEL ALTERAR O FORNECEDOR!!");
+            System.out.println("VERIFIQUE SE DIGITOU O CODIGO DO FORNECEDOR  CORRETO");
+            System.out.println("VERIFIQUE SE O FORNECEDOR ESTA NA LISTA");
+
+        }
+
 
 
 
         System.out.println("Clique <ENTER> para continuar...");
         this.sc.nextLine();
         this.sc.nextLine();
+
     }
 
     @Override
     public void Exibir() {
-      ArrayList<Fornecedor> fornelista  = this.fornecedorService.Navegar();
+        ArrayList<Fornecedor> fornelista  = this.fornecedorService.Navegar();
 
-      if(fornelista != null){
-          for(Fornecedor lista : fornelista){
-              ImprimirPorLinha(lista);
+        if(fornelista != null){
+            for(Fornecedor lista : fornelista){
+                ImprimirPorLinha(lista);
 
-          }
-      }
-      if(fornelista.isEmpty()){
-          System.out.println("NAO CONTEM NENHUM FORNECEDOR NA LISTA");
-      }
+            }
+        }
+        if(fornelista.isEmpty()){
+            System.out.println("NAO CONTEM NENHUM FORNECEDOR NA LISTA");
+        }
 
-      System.out.println("Clique <ENTER> para continuar...");
-      this.sc.nextLine();
-      this.sc.nextLine();
+        System.out.println("Clique <ENTER> para continuar...");
+        this.sc.nextLine();
+        this.sc.nextLine();
 
     }
 
@@ -213,10 +237,10 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
         Fornecedor forne = this.fornecedorService.Ler(cod);
 
         if(forne != null){
-            System.out.println("FORNECEDOR REMOVIDO COM SUCESSO:"+forne.getNomeFan());
+            System.out.println("FORNECEDOR "+forne.getNomeFan()+" FOI REMOVIDO COM SUCESSO:");
             this.fornecedorService.Remover(cod);
         }else{
-            System.out.println("ERRO AO REMOVER O FORNECEDOR");
+            System.out.println("NAO FOI POSSIVEL REMOVER O FORNECEDOR");
         }
 
         System.out.println("Clique <ENTER> para continuar...");
