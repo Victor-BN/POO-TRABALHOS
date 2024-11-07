@@ -13,13 +13,7 @@ import java.util.ArrayList;
 public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     private FornecedorService fornecedorService;
-    private Fornecedor fornecedor = new Fornecedor();
-    private  FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
-    private String razao;
-    private String nomefantasia;
-    private String cnpj;
-    private String email;
-    private String telefone;
+   
     
 
 
@@ -32,16 +26,17 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void ExibirMenu() {
+        Util.LimparConsole();
         int opt;
 
         do {
-            System.out.println("Menu funcionario ");
+            System.out.println("MENU FORNECEDOR");
             System.out.println("------------------");
-            System.out.println("1-PARA ADICIONAR UM FUNCIONARIO");
-            System.out.println("2-ATUALIZAR AS INFORMAÇOES DE UM FUNCIONARIO");
-            System.out.println("3-PESQUISAR UM FUNCIONARIO");
-            System.out.println("4-LISTAR TODOS OS FUNCIONARIOS");
-            System.out.println("5-REMOVER UM FUNCIONARIO");
+            System.out.println("1-PARA ADICIONAR UM FORNECEDOR");
+            System.out.println("2-ATUALIZAR AS INFORMAÇOES DE UM FORNECEDOR");
+            System.out.println("3-PESQUISAR UM FORNECEDOR");
+            System.out.println("4-LISTAR TODOS OS FORNECEDORES");
+            System.out.println("5-REMOVER UM FORNECEDOR");
             System.out.println("---------------------");
             System.out.println("DIGITE A OPCAO DESEJADA:");
 
@@ -75,35 +70,31 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     @Override
     public void Adicionar() {
-       // Fornecedor fornecedor = new Fornecedor();
-       // FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
+        Fornecedor fornecedor = new Fornecedor();
+        FornecedorFAKEDB fakedb = new FornecedorFAKEDB();
          
         Util.LimparConsole();
         System.out.println("DIGITE A RAZAO SOCIAL DO FORNECEDOR:");
-        razao = sc.next();
+        String razao = sc.next();
         fornecedor.setRazaoSocial(razao);
 
 
         System.out.println("DIGITE O NOME FANTASIA DO FORNECEDOR:");
-         nomefantasia = sc.next();
-         VerificaInfo();
+         String nomefantasia = sc.next();
          fornecedor.setNomeFan(nomefantasia);
 
         System.out.println("DIGITE O CNPJ:");
-         cnpj = sc.next();
-         VerificaInfo();
+         String cnpj = sc.next();
          fornecedor.setCNPJ(cnpj);
 
 
         System.out.println("DIGITE O EMAIL DO FORNECEDOR:");
-        email = sc.next();
-        VerificaInfo();
+        String email = sc.next();
         fornecedor.setEmail(email);
 
 
         System.out.println("DIGITE O TELEFONE DO FORNECEDOR");
-        telefone = sc.next();
-        VerificaInfo();
+        String telefone = sc.next();
         fornecedor.setTelefone(telefone);
 
 
@@ -120,41 +111,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
     }
 
 
-    public void VerificaInfo(){
-        for (Fornecedor forne : fakedb.getTabela()) {
-
-
-            if (forne.getNomeFan().equals(nomefantasia)) {
-                System.out.println("NOME FANTASIA:" + forne.getNomeFan() + ",EXISTENTE");
-                System.out.println("DIGITE OUTRO NOME FANTASIA DO FORNECEDOR:");
-                nomefantasia = sc.next();
-                fornecedor.setNomeFan(nomefantasia);
-                VerificaInfo();  //CHAMO O METODO PARA VERIFICAR NOVAMENTE
-            }
-            if (forne.getCNPJ().equals(cnpj)) {
-                System.out.println("O CNPJ:" + forne.getCNPJ() + ",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO CNPJ VALIDO DO FORNECEDOR:");
-                cnpj = sc.next();
-                fornecedor.setCNPJ(cnpj);
-                VerificaInfo();
-
-            }
-            if (forne.getEmail().equals(email)) {
-                System.out.println("O EMAIL:" + forne.getEmail() + ",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO EMAIL VALIDO DO FORNECEDOR:");
-                email = sc.next();
-                fornecedor.setEmail(email);
-                VerificaInfo();
-            }
-            if (forne.getTelefone().equals(telefone)) {
-                System.out.println("O TELEFONE:" + forne.getTelefone() + ",JA EXISTENTE");
-                System.out.println("DIGITE OUTRO TELEFONE VALIDO DO FORNECEDOR:");
-                telefone = sc.next();
-                fornecedor.setTelefone(telefone);
-                VerificaInfo();
-            }
-        }
-    }
+   
     @Override
     public void Atualizar() {
         Util.LimparConsole();
@@ -232,6 +189,8 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
         if(fonecedor != null){
             ImprimirPorLinha(fonecedor);
+        }else{
+
         }
 
         System.out.println("Clique <ENTER> para continuar...");
@@ -262,7 +221,7 @@ public class ForneceMenu extends BaseMenu<Fornecedor> {
 
     private void ImprimirPorLinha(Fornecedor forne){
         String mensagem = "";
-        mensagem += "Fornecedor:: ";
+        mensagem += "Fornecedor: ";
         mensagem += "Código: " + forne.getCodigo() + " | ";
         mensagem += "Razao Social: " + forne.getRazaoSocial() + " | ";
         mensagem += "Nome Fantasia:" + forne.getNomeFan() + " |";
